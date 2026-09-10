@@ -1,0 +1,381 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    width: 100%;
+    height: 100vh;
+
+    background: white;
+
+    font-family: Arial, sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   HOMESCREEN
+   ========================= */
+
+.phone {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+.homescreen {
+    width: 100%;
+    max-width: 430px;
+    height: 100vh;
+
+    padding: 24px 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    touch-action: pan-y;
+    user-select: none;
+}
+
+
+/* =========================
+   GRID
+   ========================= */
+
+.app-grid {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    column-gap: 18px;
+}
+
+
+.top-grid {
+    margin-bottom: 22px;
+}
+
+
+.bottom-grid {
+    margin-top: 34px;
+}
+
+
+/* =========================
+   APP / STUDENT
+   ========================= */
+
+.icon {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-size: 24px;
+}
+
+
+.icon img,
+.student-photo,
+.student-empty {
+    width: 74px;
+    height: 74px;
+
+    object-fit: cover;
+
+    margin-bottom: 3px;
+}
+
+
+/* =========================
+   STUDENT
+   ========================= */
+
+.student-slot {
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+
+.student-photo {
+    display: block;
+
+    background: #ddd;
+}
+
+
+.student-slot span {
+    max-width: 100%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* Lege studentplek */
+
+.student-slot.empty {
+    pointer-events: none;
+}
+
+
+.student-slot.empty::before {
+    content: "";
+
+    width: 74px;
+    height: 74px;
+
+    display: block;
+
+    margin-bottom: 3px;
+}
+
+
+/* =========================
+   THE TRIBE
+   ========================= */
+
+.tribe-widget {
+    width: 100%;
+    height: 152px;
+
+    background: #ddd;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+.tribe-widget h1 {
+    font-size: clamp(42px, 12vw, 62px);
+    font-weight: 400;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   DOTS
+   ========================= */
+
+.page-dots {
+    margin-top: auto;
+
+    min-height: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 4px;
+}
+
+
+.dot {
+    width: 8px;
+    height: 8px;
+
+    background: black;
+
+    border-radius: 50%;
+
+    transition: transform 0.25s ease;
+}
+
+
+.dot.active {
+    transform: scale(1.7);
+}
+
+
+/* =========================
+   SWIPE ANIMATIES
+   ========================= */
+
+.swipe-left .student-slot {
+    animation: studentLeft 0.3s ease forwards;
+}
+
+
+.swipe-right .student-slot {
+    animation: studentRight 0.3s ease forwards;
+}
+
+
+.swipe-left .app-icon {
+    animation: appLeft 0.3s ease;
+}
+
+
+.swipe-right .app-icon {
+    animation: appRight 0.3s ease;
+}
+
+
+/* Studenten verlaten scherm */
+
+@keyframes studentLeft {
+
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+}
+
+
+@keyframes studentRight {
+
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+}
+
+
+/* Apps bewegen een klein beetje mee */
+
+@keyframes appLeft {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+}
+
+
+@keyframes appRight {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =========================
+   NIEUWE STUDENTEN
+   ========================= */
+
+.student-enter-left {
+    animation: enterRight 0.3s ease;
+}
+
+
+.student-enter-right {
+    animation: enterLeft 0.3s ease;
+}
+
+
+@keyframes enterRight {
+
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+
+@keyframes enterLeft {
+
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =========================
+   KLEINERE TELEFOONS
+   ========================= */
+
+@media (max-width: 370px) {
+
+    .homescreen {
+        padding: 18px 16px;
+    }
+
+
+    .app-grid {
+        column-gap: 10px;
+    }
+
+
+    .icon {
+        font-size: 20px;
+    }
+
+
+    .icon img,
+    .student-photo,
+    .student-slot.empty::before {
+        width: 65px;
+        height: 65px;
+    }
+
+
+    .tribe-widget {
+        height: 135px;
+    }
+
+
+    .tribe-widget h1 {
+        font-size: 40px;
+    }
+
+}
